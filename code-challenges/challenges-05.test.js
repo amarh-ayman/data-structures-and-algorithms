@@ -149,6 +149,10 @@ You may also use other string or array methods.
 const splitFoods = (recipe) => {
   let result = [];
   // Solution code here...
+  recipe.ingredients.forEach((str) =>
+    result.push(str.slice(str.indexOf(" ", 3) + 1))
+  );
+
   return result;
 };
 
@@ -165,6 +169,8 @@ Return a new array containing just the verbs. For example, ['Mix until evenly di
 const stepActions = (recipe) => {
   let result = [];
   // Solution code here...
+  recipe.steps.forEach((str) => result.push(str.slice(0, str.indexOf(" "))));
+
   return result;
 };
 
@@ -183,6 +189,11 @@ For example:
 
 const removeEvenValues = (arr) => {
   // Solution code here...
+  for (let i = 0; i < arr.length; i++)
+    if (arr[i] % 2 == 0) {
+      arr.splice(i, 1);
+      i--;
+    }
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -202,6 +213,10 @@ removeLastCharacters('Gregor', 9) returns ''
 
 const removeLastCharacters = (str, numberOfCharacters) => {
   // Solution code here...
+  let s = str.split("");
+  s.splice(s.length - numberOfCharacters);
+  let a = s.join("");
+  return a;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -213,6 +228,8 @@ Write a function named totalSumCSV that, given a string of comma-separated value
 const totalSumCSV = (str) => {
   let total = 0;
   // Solution code here...
+  let a = str.split(",");
+  a.forEach((item) => (total += Number(item)));
   return total;
 };
 
@@ -226,6 +243,7 @@ For example, removeVowels('gregor') returns 'grgr'.
 
 const removeVowels = (str) => {
   // Solution code here...
+  return str.split(/[aeuio]/).join("");
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -240,6 +258,14 @@ Similarly, extractVowels('The quick brown fox') returns ['Th qck brwn fx', 'eioo
 
 const extractVowels = (str) => {
   // Solution code here...
+  let a = str.split(/[aeuio]/).join("");
+  let b = str
+    .split(/(?![aeuio])./)
+    .join("")
+    .split("")
+    .sort()
+    .join("");
+  return [a, b];
 };
 
 /* ------------------------------------------------------------------------------------------------
