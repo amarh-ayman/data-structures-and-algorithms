@@ -124,6 +124,11 @@ HR has asked you to change the data to make it easier to print so that it looks 
 
 const updateNumbers = (obj) => {
   // Solution code here...
+  let arr02 = [];
+  Object.entries(obj).forEach((item) => {
+    arr02.push(`${item[0]}: ${item[1]}`);
+  });
+  return arr02;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -154,9 +159,11 @@ hasChildrenValues(characters, 'Sansa') will return false
 
 const hasChildrenValues = (arr, character) => {
   // Solution code here...
-  arr.forEach((item) =>
-    item.name == character && item.children.length > 0 ? 1 : 0
-  );
+  let b = false;
+  Object.values(arr).forEach((item) => {
+    if (item.name == character && item.children.length > 0) b = true;
+  });
+  return b;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -169,6 +176,11 @@ The input and output of this function are the same as the input and output from 
 
 const hasChildrenEntries = (arr, character) => {
   // Solution code here...
+  let b = false;
+  Object.entries(arr).forEach((item) => {
+    if (item[1].name == character && item[1].children.length > 0) b = true;
+  });
+  return b;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -179,6 +191,12 @@ Write a function named totalCharacters that takes in an array and returns the nu
 
 const totalCharacters = (arr) => {
   // Solution code here...
+  let sum = 0;
+  arr.forEach((item) => {
+    if (Object.values(item).includes(null)) sum--;
+    sum += Object.values(item).length;
+  });
+  return sum;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -291,7 +309,7 @@ describe("Testing challenge 6", () => {
   });
 });
 
-xdescribe("Testing challenge 7", () => {
+describe("Testing challenge 7", () => {
   test("It should return true for characters that have children", () => {
     expect(hasChildrenEntries(characters, "Eddard")).toBeTruthy();
   });
@@ -301,7 +319,7 @@ xdescribe("Testing challenge 7", () => {
   });
 });
 
-xdescribe("Testing challenge 8", () => {
+describe("Testing challenge 8", () => {
   test("It should return the number of characters in the array", () => {
     expect(totalCharacters(characters)).toStrictEqual(26);
   });
